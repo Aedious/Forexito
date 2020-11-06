@@ -1,31 +1,33 @@
-import fxcmpy
 import datetime as dt
-import params
-import User_inputs as imputs
+import params as p
+import init_ai
 import pandas as pd
+import signal
+import sys
+import closing
+import time
 
+signal.signal(signal.SIGINT, closing.closing_signal)
 #SUBSCRIBE TO ALL CURRENCIES BEFORE GET LIVE DATA
-imputs.User_Imputs()
+init_ai.init_ai()
+
 #INIT ALL PROCESSES FUNCTION REQUIRED
-trader = fxcmpy.fxcmpy(access_token=params.token, log_level="error", log_file=None)
-trader.subscribe_market_data('EUR/USD')
-trader.get_subscribed_symbols()
-actual = trader.get_last_price('EUR/USD')
+
+p.trader.subscribe_market_data('EUR/USD')
+p.trader.get_subscribed_symbols()
+actual = p.trader.get_last_price('EUR/USD')
 while True:
-    print('1')
-    actual = trader.get_prices('EUR/USD')
+    # actual = p.trader.get_prices('EUR/USD')
+    actual = p.trader.get_last_price('EUR/USD')
     print(actual)
-    print('2')
-    actual = trader.get_last_price('EUR/USD')
-    print(actual)
-exit(0)
-print(trader)
+    time.sleep(2)
+print(p.trader)
 print('logged')
-# params.trader.open_trade(symbol=params.currency, is_buy=direction,amount=params.amount, time_in_force='GTC', order_type='AtMarket', is_in_pips=True, limit=params.limit, stop=params.stop, trailing_step=10)
-# params.trader.open_trade(symbol='EUR/USD', is_buy=True,amount=1, time_in_force='GTC', order_type='AtMarket', is_in_pips=True)
+# p.trader.open_trade(symbol=p.currency, is_buy=direction,amount=p.amount, time_in_force='GTC', order_type='AtMarket', is_in_pips=True, limit=p.limit, stop=p.stop, trailing_step=10)
+# p.trader.open_trade(symbol='EUR/USD', is_buy=True,amount=1, time_in_force='GTC', order_type='AtMarket', is_in_pips=True)
 # trade = trader.open_trade(symbol='EUR/USD', is_buy=True,amount=1, time_in_force='GTC', order_type='AtMarket')
 print('1')
-trade = trader.get_open_positions(kind='list')
+trade = p.trader.get_open_positions(kind='list')
 print(trade)
 print(trade[0])
 print('2')
