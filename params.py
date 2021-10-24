@@ -1,11 +1,28 @@
 #User Params
-token = 'fd9ac39beb84d3114e6c61d3fb10fb5a3b6ad116'
+token = ''
 currency = ['EUR/USD', 'GBP/USD', 'USD/CHF', 'AUD/USD']
-
+# currency = ['EUR/USD', 'GBP/USD', 'USD/CHF', 'AUD/USD', 'EUR/GBP', 'EUR/CHF', 'AUD/NZD', 'NZD/CAD', 'GBP/CHF', 'USD/JPY']
+periods = ['m1', 'm5', 'm15']
+data_currency = []
+should_update = []
+positions = []
+buy_order = [-1, -1, -1, -1]
+# buy_order = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+# buy_order_type = ['B', 'B', 'B', 'B']
+# buy_order_type = ['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B']
+buy_order_type = ['S', 'S', 'S', 'S']
+# stop_loss = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+stop_loss = [-1, -1, -1, -1]
+start = [False, False, False, False]
 #Global variables
 trader = None
 stopbuy = False
-positions = []
+quitting = True
+New_Data = [True, True, True, True]
+# New_Data = [True, True, True, True, True, True, True, True, True, True]
+amount = 1
+# amount = 100
+tralling = 0.0002
 
 #Terminal colors
 red = "\033[91m"
@@ -27,7 +44,6 @@ currency_list = [
 'USD/CHF'
 ]
 
-#ta-lib
-
-# past_orders = p.trader.get_order_ids()
-# candles = p.trader.get_candles('EUR/USD', period='m1', number=200)
+# R3 - R2 - R1 - PP - S1 - S2 - S3
+# S ask
+# B bid
